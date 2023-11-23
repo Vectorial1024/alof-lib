@@ -3,9 +3,10 @@
     "type": "library",
     "description": "PHP array-like object functions library.",
     "keywords": [
-        "object",
         "util",
-        "array"
+        "object",
+        "arrayaccess",
+        "traversable"
     ],
     "license": "MIT",
     "autoload": {
