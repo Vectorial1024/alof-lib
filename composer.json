@@ -1,0 +1,22 @@
+{
+    "name": "vectorial1024/alof-lib",
+    "type": "library",
+    "description": "PHP array-like object functions library.",
+    "keywords": [
+        "object",
+        "util",
+        "array"
+    ],
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Vectorial1024\\AlofLib\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Vectorial1024"
+        }
+    ],
+    "require": {}
+}
