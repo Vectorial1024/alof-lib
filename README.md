@@ -16,3 +16,10 @@ Requires PHP 8.1.
 Note: because this is a userland polyfill of the array functions, the exact behavior of ALO functions may be different from their array function counterparts.
 
 Disclaimer: because of the many possibilities of array-like objects, perhaps some functions do not make sense for specific object types. Users should check that the operations make sense before using the ALO functions.
+
+## Testing
+This library uses PHPUnit for testing. To test this library, run:
+
+```
+./vendor/bin/phpunit tests
+```
