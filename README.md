@@ -1,5 +1,6 @@
 # alof-lib
 [![stable](http://poser.pugx.org/vectorial1024/alof-lib/v)](https://packagist.org/packages/vectorial1024/alof-lib)
+![phpunit](https://github.com/vectorial1024/alof-lib/actions/workflows/php.yml/badge.svg)
 [![downloads](http://poser.pugx.org/vectorial1024/alof-lib/downloads)](https://packagist.org/packages/vectorial1024/alof-lib)
 [![license](http://poser.pugx.org/vectorial1024/alof-lib/license)](https://packagist.org/packages/vectorial1024/alof-lib)
 [![php](http://poser.pugx.org/vectorial1024/alof-lib/require/php)](https://packagist.org/packages/vectorial1024/alof-lib)
