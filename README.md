@@ -24,14 +24,14 @@ A PHP `array` is NOT an ALO. It is still an array.
 
 Requires PHP 8.1.
 
-Note: while this is a user-land "polyfill" of the array functions to ALOs, the corresponding behavior of the ALO functions are still faithful to their array function counterparts.
-
-Disclaimer: because of the many possibilities of array-like objects, perhaps some functions do not make sense for specific object types. Users should check that the operations make sense before using the ALO functions.
+## Notes and Disclaimers
+- ALO functions aim to be faithful user-land reproductions of their array function counterparts, but there might be slight differences between both sides
+- Some ALO functions may not make sense depending on your exact ALO implementation; use judgement before you use the ALO functions
 
 ## Testing
 This library uses PHPUnit for testing, which can be triggered from Composer. To test this library, run:
 
-```
+```shell
 composer run-script test
 ```
 
@@ -40,13 +40,20 @@ Refer to the test cases under `/tests` for more examples, but for a minimal exam
 ```php
 use Vectorial1024\AlofLib\Alof;
 
-$map = new WeakMap();
 $objKey = new stdClass();
 $objKey->name = "foo";
+
+// conveniently get the keys of the WeakMap (WeakMap becomes a "WeakHashSet" for objects)
+$map = new WeakMap();
 $map[$objKey] = "1";
 $map[$objKey] = 2;
 $map[$objKey] = "Hello World!";
-
-// conveniently get the keys of the WeakMap
 $keys = Alof::alo_keys($map);
+assert($keys === [$objKey]); // passes
+
+// correctly get the keys of the SplObjectStorage (no more nasty foreach surprises!)
+$splObjectStore = new SplObjectStorage();
+$splObjectStore[$objKey] = "Hello World!";
+$keys = Alof::alo_keys($splObjectStore);
+assert($keys === [$objKey]); // passes
 ```
