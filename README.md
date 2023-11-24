@@ -23,7 +23,7 @@ A PHP `array` is NOT an ALO. It is still an array.
 
 Requires PHP 8.1.
 
-Note: because this is a userland polyfill of the array functions, the exact behavior of ALO functions may be different from their array function counterparts.
+Note: while this is a user-land "polyfill" of the array functions to ALOs, the corresponding behavior of the ALO functions are still faithful to their array function counterparts.
 
 Disclaimer: because of the many possibilities of array-like objects, perhaps some functions do not make sense for specific object types. Users should check that the operations make sense before using the ALO functions.
 
