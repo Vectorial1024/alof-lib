@@ -33,9 +33,9 @@ class Alof
      * @param mixed $filter_value (optional) the value to filter by
      * @param bool $strict (optional) whether to use strict comparison (===) while filtering
      * @return array<TKey>
-     * @see array_keys for equivalent behavior in arrays
+     * @see array_keys() for equivalent behavior in arrays
      */
-    public static function alo_keys(ArrayAccess&Traversable $alo, mixed $filter_value = null, bool $strict = false): array
+    public static function alo_keys(Traversable&ArrayAccess $alo, mixed $filter_value = null, bool $strict = false): array
     {
         // use separate loops for best performance
         $result = [];
