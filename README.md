@@ -1,4 +1,9 @@
 # alof-lib
+[![stable](http://poser.pugx.org/vectorial1024/alof-lib/v)](https://packagist.org/packages/vectorial1024/alof-lib)
+[![downloads](http://poser.pugx.org/vectorial1024/alof-lib/downloads)](https://packagist.org/packages/vectorial1024/alof-lib)
+[![license](http://poser.pugx.org/vectorial1024/alof-lib/license)](https://packagist.org/packages/vectorial1024/alof-lib)
+[![php](http://poser.pugx.org/vectorial1024/alof-lib/require/php)](https://packagist.org/packages/vectorial1024/alof-lib)
+
 (This is a WIP project!)
 
 PHP array-like object functions library ("alof-lib"). Type-hinted functions for array-like objects, just like [those for native arrays](https://www.php.net/manual/en/ref.array.php). Think of this library as a polyfill of those useful functions for array-like objects, so that you may write clean code with array-like objects.
