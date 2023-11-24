@@ -6,7 +6,15 @@
         "util",
         "object",
         "arrayaccess",
-        "traversable"
+        "traversable",
+        "arrayobject",
+        "arrayiterator",
+        "splobjectstorage",
+        "spldoublylinkedlist",
+        "splfixedarray",
+        "splqueue",
+        "splstack",
+        "weakmap"
     ],
     "license": "MIT",
     "autoload": {

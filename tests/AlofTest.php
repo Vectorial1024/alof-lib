@@ -12,7 +12,10 @@ final class AlofTest extends TestCase
         $this->assertTrue(Alof::is_alo(new WeakMap()));
         $this->assertTrue(Alof::is_alo(new ArrayObject()));
         $this->assertTrue(Alof::is_alo(new ArrayIterator([])));
+        $this->assertTrue(Alof::is_alo(new SplDoublyLinkedList()));
         $this->assertTrue(Alof::is_alo(new SplFixedArray(10)));
+        $this->assertTrue(Alof::is_alo(new SplStack()));
+        $this->assertTrue(Alof::is_alo(new SplQueue()));
         $this->assertTrue(Alof::is_alo(new SplObjectStorage()));
 
         // is not alo
