@@ -7,6 +7,36 @@ use Vectorial1024\AlofLib\Alof;
 
 final class AlofTest extends TestCase
 {
+    private SplObjectStorage $splObjectStore;
+    private array $sosKeys;
+    private array $sosValues;
+
+    public function setUp(): void
+    {
+        // for convenience to test with SplObjectStorage, we are defining some convenient values
+        /*
+         * why we need to test SplObjectStorage separately?
+         * refer to the following:
+         * https://www.php.net/manual/en/class.splobjectstorage.php
+         * https://bugs.php.net/bug.php?id=49967
+         * TL;DR: SplObjectStorage does not provide the object keys correctly due to a legacy bug
+         */
+
+        $dummyObj1 = new stdClass();
+        $dummyObj1->id = 1;
+        $dummyObj2 = new stdClass();
+        $dummyObj2->id = 2;
+        $dummyObj3 = new stdClass();
+        $dummyObj3->id = 3;
+
+        $this->splObjectStore = new SplObjectStorage();
+        $this->splObjectStore[$dummyObj1] = 1;
+        $this->splObjectStore[$dummyObj2] = 2;
+        $this->splObjectStore[$dummyObj3] = 3;
+        $this->sosKeys = [$dummyObj1, $dummyObj2, $dummyObj3];
+        $this->sosValues = [1, 2, 3];
+    }
+
     public function testIsAlo()
     {
         // is alo
@@ -19,6 +49,7 @@ final class AlofTest extends TestCase
         $this->assertTrue(Alof::is_alo(new SplStack()));
         $this->assertTrue(Alof::is_alo(new SplQueue()));
         $this->assertTrue(Alof::is_alo(new SplObjectStorage()));
+        $this->assertTrue(Alof::is_alo($this->splObjectStore));
 
         // is not alo
         // basically, other primitive types and objects
@@ -31,7 +62,8 @@ final class AlofTest extends TestCase
         $this->assertFalse(Alof::is_alo([]));
         $this->assertFalse(Alof::is_alo(new stdClass()));
         $handle = fopen(__FILE__, 'r');
-        $this->assertFalse(Alof::is_alo($handle));
+        $this->assertFalse(Alof::is_alo($this->sosKeys));
+        $this->assertFalse(Alof::is_alo($this->sosValues));
     }
 
     public function testAloKeys()
@@ -47,31 +79,8 @@ final class AlofTest extends TestCase
         $this->assertEquals([0], Alof::alo_keys($testAlo, '0'));
         $this->assertEquals([0], Alof::alo_keys($testAlo, 0, true));
         $this->assertEquals([], Alof::alo_keys($testAlo, '0', true));
-    }
 
-    public function testAloKeysSplObjectStorage()
-    {
-        /*
-         * special case; refer to the following:
-         * https://www.php.net/manual/en/class.splobjectstorage.php
-         * https://bugs.php.net/bug.php?id=49967
-         * TL;DR: SplObjectStorage does not provide the object keys correctly due to a legacy bug
-         */
-
-        $dummyObj1 = new stdClass();
-        $dummyObj1->id = 1;
-        $dummyObj2 = new stdClass();
-        $dummyObj2->id = 2;
-        $dummyObj3 = new stdClass();
-        $dummyObj3->id = 3;
-
-        $objectStore = new SplObjectStorage();
-        $objectStore[$dummyObj1] = 1;
-        $objectStore[$dummyObj2] = 2;
-        $objectStore[$dummyObj3] = 3;
-
-        $aloKeys = Alof::alo_keys($objectStore);
-        $this->assertEquals([$dummyObj1, $dummyObj2, $dummyObj3], $aloKeys);
+        $this->assertEquals($this->sosKeys, Alof::alo_keys($this->splObjectStore));
     }
 
     public function testAloValues()
@@ -83,6 +92,8 @@ final class AlofTest extends TestCase
         ];
         $testAlo = new ArrayObject($testArray);
         $this->assertEquals(array_values($testArray), Alof::alo_values($testAlo));
+
+        $this->assertEquals($this->sosValues, Alof::alo_values($this->splObjectStore));
     }
 
     public function testAloWalk()
@@ -132,5 +143,17 @@ final class AlofTest extends TestCase
         foreach ($output as $key => $value) {
             $this->assertEquals($value, $key * $testArray3[$key] * $factor);
         }
+
+        // test against SplObjectStorage by reconstruction
+        $outputObjStore = new SplObjectStorage();
+        Alof::alo_walk($this->splObjectStore, function (int $item, stdClass $key) use ($outputObjStore) {
+            $outputObjStore[$key] = $item;
+        });
+        $this->assertTrue($outputObjStore->contains($this->sosKeys[0]));
+        $this->assertTrue($outputObjStore->contains($this->sosKeys[1]));
+        $this->assertTrue($outputObjStore->contains($this->sosKeys[2]));
+        $this->assertEquals($this->sosValues[0], $outputObjStore[$this->sosKeys[0]]);
+        $this->assertEquals($this->sosValues[1], $outputObjStore[$this->sosKeys[1]]);
+        $this->assertEquals($this->sosValues[2], $outputObjStore[$this->sosKeys[2]]);
     }
 }

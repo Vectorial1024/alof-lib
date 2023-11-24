@@ -115,17 +115,33 @@ class Alof
 
     /**
      * Returns the values of the given array-like object; the resulting array is numerically indexed.
-     *
-     * Note: this is basically a convenience wrapper over `iterator_to_array`.
      * @template TValue
      * @param Traversable<mixed, TValue>&ArrayAccess<mixed, TValue> $alo
      * @return list<TValue>
      * @see array_values() for equivalent behavior in arrays
-     * @see iterator_to_array() for implementation details
      */
     public static function alo_values(Traversable&ArrayAccess $alo): array
     {
+        if ($alo instanceof SplObjectStorage) {
+            // special handling for SplObjectStorage
+            return self::alo_values_splObjectStore($alo);
+        }
         return iterator_to_array($alo, preserve_keys: false);
+    }
+
+    /**
+     * alo_values, but for SplObjectStorage to account for its legacy bug.
+     * @param SplObjectStorage $storage
+     * @return array
+     * @see alo_values()
+     */
+    private static function alo_values_splObjectStore(SplObjectStorage $storage): array
+    {
+        $result = [];
+        foreach ($storage as $objKey) {
+            $result[] = $storage[$objKey];
+        }
+        return $result;
     }
 
     /**
@@ -157,8 +173,8 @@ class Alof
      */
     private static function alo_walk_splObjectStore(SplObjectStorage $objectStorage, callable $callback, array $args = []): bool
     {
-        foreach ($objectStorage as $ignored) {
-            $callback($objectStorage->current(), $objectStorage->getInfo(), ...$args);
+        foreach ($objectStorage as $objKey) {
+            $callback($objectStorage[$objKey], $objKey, ...$args);
         }
         return true;
     }
