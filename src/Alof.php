@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Vectorial1024\AlofLib;
 
 use ArrayAccess;
+use SplObjectStorage;
 use Traversable;
 
 /**
@@ -37,6 +38,10 @@ class Alof
      */
     public static function alo_keys(Traversable&ArrayAccess $alo, mixed $filter_value = null, bool $strict = false): array
     {
+        if ($alo instanceof SplObjectStorage) {
+            // special handling of SplObjectStorage
+            return self::alo_keys_splObjectStore($alo, $filter_value, $strict);
+        }
         // use separate loops for best performance
         $result = [];
         if (!$filter_value) {
@@ -62,6 +67,48 @@ class Alof
                 continue;
             }
             $result[] = $key;
+        }
+        return $result;
+    }
+
+    /**
+     * alo_keys, but for SplObjectStorage to account for its legacy bug.
+     * @template TKey
+     * @param SplObjectStorage<TKey, mixed> $storage
+     * @param mixed $filter_value
+     * @param bool $strict
+     * @return array
+     * @see alo_keys()
+     */
+    private static function alo_keys_splObjectStore(SplObjectStorage $storage, mixed $filter_value = null, bool $strict = false): array
+    {
+        // use separate loops for best performance
+        $result = [];
+        if (!$filter_value) {
+            // keys only
+            foreach ($storage as $ignored) {
+                $result[] = $storage->current();
+            }
+            return $result;
+        }
+        if (!$strict) {
+            // non-strict filtering
+            foreach ($storage as $ignored) {
+                $theKey = $storage->current();
+                if ($theKey != $filter_value) {
+                    continue;
+                }
+                $result[] = $theKey;
+            }
+            return $result;
+        }
+        // strict filtering
+        foreach ($storage as $ignored) {
+            $theKey = $storage->current();
+            if ($theKey !== $filter_value) {
+                continue;
+            }
+            $result[] = $theKey;
         }
         return $result;
     }

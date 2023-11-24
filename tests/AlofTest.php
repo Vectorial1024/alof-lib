@@ -49,6 +49,31 @@ final class AlofTest extends TestCase
         $this->assertEquals([], Alof::alo_keys($testAlo, 4, true));
     }
 
+    public function testAloKeysSplObjectStorage()
+    {
+        /*
+         * special case; refer to the following:
+         * https://www.php.net/manual/en/class.splobjectstorage.php
+         * https://bugs.php.net/bug.php?id=49967
+         * TL;DR: SplObjectStorage does not provide the object keys correctly due to a legacy bug
+         */
+
+        $dummyObj1 = new stdClass();
+        $dummyObj1->id = 1;
+        $dummyObj2 = new stdClass();
+        $dummyObj2->id = 2;
+        $dummyObj3 = new stdClass();
+        $dummyObj3->id = 3;
+
+        $objectStore = new SplObjectStorage();
+        $objectStore[$dummyObj1] = 1;
+        $objectStore[$dummyObj2] = 2;
+        $objectStore[$dummyObj3] = 3;
+
+        $aloKeys = Alof::alo_keys($objectStore);
+        $this->assertEquals([$dummyObj1, $dummyObj2, $dummyObj3], $aloKeys);
+    }
+
     public function testAloValues()
     {
         $testArray = [
