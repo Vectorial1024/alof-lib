@@ -48,4 +48,15 @@ final class AlofTest extends TestCase
         $this->assertEquals(['4'], Alof::alo_keys($testAlo, '4', true));
         $this->assertEquals([], Alof::alo_keys($testAlo, 4, true));
     }
+
+    public function testAloValues()
+    {
+        $testArray = [
+            1 => 1,
+            '4' => '4',
+            'c' => 'c',
+        ];
+        $testAlo = new ArrayObject($testArray);
+        $this->assertEquals(array_values($testArray), Alof::alo_values($testAlo));
+    }
 }

@@ -65,4 +65,19 @@ class Alof
         }
         return $result;
     }
+
+    /**
+     * Returns the values of the given array-like object; the resulting array is numerically indexed.
+     *
+     * Note: this is basically a convenience wrapper over `iterator_to_array`.
+     * @template TValue
+     * @param Traversable<mixed, TValue>&ArrayAccess<mixed, TValue> $alo
+     * @return list<TValue>
+     * @see array_values() for equivalent behavior in arrays
+     * @see iterator_to_array() for implementation details
+     */
+    public static function alo_values(Traversable&ArrayAccess $alo): array
+    {
+        return iterator_to_array($alo, preserve_keys: false);
+    }
 }
