@@ -54,7 +54,7 @@ class Alof
         if (!$strict) {
             // non-strict filtering
             foreach ($alo as $key => $value) {
-                if ($value != $filter_value) {
+                if ($key != $filter_value) {
                     continue;
                 }
                 $result[] = $key;
@@ -63,7 +63,7 @@ class Alof
         }
         // strict filtering
         foreach ($alo as $key => $value) {
-            if ($value !== $filter_value) {
+            if ($key !== $filter_value) {
                 continue;
             }
             $result[] = $key;

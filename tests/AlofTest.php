@@ -37,9 +37,9 @@ final class AlofTest extends TestCase
     public function testAloKeys()
     {
         $testArray = [
-            1 => 1,
-            '4' => '4',
-            'c' => 'c',
+            1 => 3,
+            '4' => 'c',
+            'c' => 'g',
         ];
         $testAlo = new ArrayObject($testArray);
         $this->assertEquals([1, '4', 'c'], Alof::alo_keys($testAlo));
@@ -77,9 +77,9 @@ final class AlofTest extends TestCase
     public function testAloValues()
     {
         $testArray = [
-            1 => 1,
-            '4' => '4',
-            'c' => 'c',
+            1 => 3,
+            '4' => 'c',
+            'c' => 'g',
         ];
         $testAlo = new ArrayObject($testArray);
         $this->assertEquals(array_values($testArray), Alof::alo_values($testAlo));
