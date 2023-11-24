@@ -7,15 +7,17 @@ use Vectorial1024\AlofLib\Alof;
 
 final class AlofTest extends TestCase
 {
-    private SplObjectStorage $splObjectStore;
+    // list of ALO<TKey> where TKey instanceof object
+    private array $aloWithObjAsKeyType;
     private array $sosKeys;
     private array $sosValues;
 
     public function setUp(): void
     {
-        // for convenience to test with SplObjectStorage, we are defining some convenient values
+        // for convenience to test with SplObjectStorage (and other known object-key ALOs), we are defining some convenient values
+
         /*
-         * why we need to test SplObjectStorage separately?
+         * why we need to write code for SplObjectStorage separately?
          * refer to the following:
          * https://www.php.net/manual/en/class.splobjectstorage.php
          * https://bugs.php.net/bug.php?id=49967
@@ -29,12 +31,20 @@ final class AlofTest extends TestCase
         $dummyObj3 = new stdClass();
         $dummyObj3->id = 3;
 
-        $this->splObjectStore = new SplObjectStorage();
-        $this->splObjectStore[$dummyObj1] = 1;
-        $this->splObjectStore[$dummyObj2] = 2;
-        $this->splObjectStore[$dummyObj3] = 3;
+        $splObjectStore = new SplObjectStorage();
+        $splObjectStore[$dummyObj1] = 1;
+        $splObjectStore[$dummyObj2] = 2;
+        $splObjectStore[$dummyObj3] = 3;
         $this->sosKeys = [$dummyObj1, $dummyObj2, $dummyObj3];
         $this->sosValues = [1, 2, 3];
+
+        // we also set it up for WeakMap
+        $weakMap = new WeakMap();
+        $weakMap[$dummyObj1] = 1;
+        $weakMap[$dummyObj2] = 2;
+        $weakMap[$dummyObj3] = 3;
+
+        $this->aloWithObjAsKeyType = [$splObjectStore, $weakMap];
     }
 
     public function testIsAlo()
@@ -49,7 +59,9 @@ final class AlofTest extends TestCase
         $this->assertTrue(Alof::is_alo(new SplStack()));
         $this->assertTrue(Alof::is_alo(new SplQueue()));
         $this->assertTrue(Alof::is_alo(new SplObjectStorage()));
-        $this->assertTrue(Alof::is_alo($this->splObjectStore));
+        foreach ($this->aloWithObjAsKeyType as $alo) {
+            $this->assertTrue(Alof::is_alo($alo));
+        }
 
         // is not alo
         // basically, other primitive types and objects
@@ -81,12 +93,15 @@ final class AlofTest extends TestCase
         $this->assertEquals([0], Alof::alo_keys($testAlo, 0, true));
         $this->assertEquals([], Alof::alo_keys($testAlo, '0', true));
 
-        $this->assertEquals($this->sosKeys, Alof::alo_keys($this->splObjectStore));
-        $this->assertEquals([$this->sosKeys[0]], Alof::alo_keys($this->splObjectStore, $this->sosKeys[0]));
-        $fakeDummy = clone $this->sosKeys[0];
-        $this->assertEquals([$this->sosKeys[0]], Alof::alo_keys($this->splObjectStore, $fakeDummy));
-        $this->assertEquals([$this->sosKeys[0]], Alof::alo_keys($this->splObjectStore, $this->sosKeys[0], true));
-        $this->assertEquals([], Alof::alo_keys($this->splObjectStore, $fakeDummy, true));
+        foreach ($this->aloWithObjAsKeyType as $alo) {
+            $this->assertEquals($this->sosKeys, Alof::alo_keys($alo));
+            $this->assertEquals($this->sosKeys, Alof::alo_keys($alo));
+            $this->assertEquals([$this->sosKeys[0]], Alof::alo_keys($alo, $this->sosKeys[0]));
+            $fakeDummy = clone $this->sosKeys[0];
+            $this->assertEquals([$this->sosKeys[0]], Alof::alo_keys($alo, $fakeDummy));
+            $this->assertEquals([$this->sosKeys[0]], Alof::alo_keys($alo, $this->sosKeys[0], true));
+            $this->assertEquals([], Alof::alo_keys($alo, $fakeDummy, true));
+        }
     }
 
     public function testAloValues()
@@ -99,7 +114,9 @@ final class AlofTest extends TestCase
         $testAlo = new ArrayObject($testArray);
         $this->assertEquals(array_values($testArray), Alof::alo_values($testAlo));
 
-        $this->assertEquals($this->sosValues, Alof::alo_values($this->splObjectStore));
+        foreach ($this->aloWithObjAsKeyType as $alo) {
+            $this->assertEquals($this->sosValues, Alof::alo_values($alo));
+        }
     }
 
     public function testAloWalk()
@@ -150,16 +167,13 @@ final class AlofTest extends TestCase
             $this->assertEquals($value, $key * $testArray3[$key] * $factor);
         }
 
-        // test against SplObjectStorage by reconstruction
-        $outputObjStore = new SplObjectStorage();
-        Alof::alo_walk($this->splObjectStore, function (int $item, stdClass $key) use ($outputObjStore) {
-            $outputObjStore[$key] = $item;
-        });
-        $this->assertTrue($outputObjStore->contains($this->sosKeys[0]));
-        $this->assertTrue($outputObjStore->contains($this->sosKeys[1]));
-        $this->assertTrue($outputObjStore->contains($this->sosKeys[2]));
-        $this->assertEquals($this->sosValues[0], $outputObjStore[$this->sosKeys[0]]);
-        $this->assertEquals($this->sosValues[1], $outputObjStore[$this->sosKeys[1]]);
-        $this->assertEquals($this->sosValues[2], $outputObjStore[$this->sosKeys[2]]);
+        // test against object keys by walk-sum
+        foreach ($this->aloWithObjAsKeyType as $alo) {
+            $sum = 0;
+            Alof::alo_walk($alo, function ($item) use (&$sum) {
+                $sum += $item;
+            });
+            $this->assertEquals(array_sum($this->sosValues), $sum);
+        }
     }
 }
