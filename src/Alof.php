@@ -138,8 +138,27 @@ class Alof
      */
     public static function alo_walk(Traversable&ArrayAccess $alo, callable $callback, array $args = []): bool
     {
+        if ($alo instanceof SplObjectStorage) {
+            return self::alo_walk_splObjectStore($alo, $callback, $args);
+        }
         foreach ($alo as $key => $value) {
             $callback($value, $key, ...$args);
+        }
+        return true;
+    }
+
+    /**
+     * alo_walk, but for SplObjectStorage to account for its legacy bug.
+     * @param SplObjectStorage<mixed, mixed> $objectStorage
+     * @param callable $callback
+     * @param array $args
+     * @return true
+     * @see alo_walk()
+     */
+    private static function alo_walk_splObjectStore(SplObjectStorage $objectStorage, callable $callback, array $args = []): bool
+    {
+        foreach ($objectStorage as $ignored) {
+            $callback($objectStorage->current(), $objectStorage->getInfo(), ...$args);
         }
         return true;
     }
