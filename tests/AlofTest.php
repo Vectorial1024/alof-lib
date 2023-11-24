@@ -62,6 +62,7 @@ final class AlofTest extends TestCase
         $this->assertFalse(Alof::is_alo([]));
         $this->assertFalse(Alof::is_alo(new stdClass()));
         $handle = fopen(__FILE__, 'r');
+        $this->assertFalse($handle);
         $this->assertFalse(Alof::is_alo($this->sosKeys));
         $this->assertFalse(Alof::is_alo($this->sosValues));
     }

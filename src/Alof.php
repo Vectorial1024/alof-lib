@@ -5,8 +5,11 @@ declare(strict_types=1);
 namespace Vectorial1024\AlofLib;
 
 use ArrayAccess;
+use SplDoublyLinkedList;
+use SplFixedArray;
 use SplObjectStorage;
 use Traversable;
+use WeakMap;
 
 /**
  * The class containing various array-like object functions.
@@ -62,6 +65,10 @@ class Alof
             return $result;
         }
         // strict filtering
+        if ($alo instanceof WeakMap || $alo instanceof SplFixedArray || $alo instanceof SplDoublyLinkedList) {
+            // these types have strict key types; either the key exists, or it does not.
+            return isset($alo[$filter_value]) ? [$filter_value] : [];
+        }
         foreach ($alo as $key => $value) {
             if ($key !== $filter_value) {
                 continue;
