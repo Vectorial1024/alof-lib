@@ -28,10 +28,10 @@ Note: while this is a user-land "polyfill" of the array functions to ALOs, the c
 Disclaimer: because of the many possibilities of array-like objects, perhaps some functions do not make sense for specific object types. Users should check that the operations make sense before using the ALO functions.
 
 ## Testing
-This library uses PHPUnit for testing. To test this library, run:
+This library uses PHPUnit for testing, which can be triggered from Composer. To test this library, run:
 
 ```
-./vendor/bin/phpunit tests
+composer run-script test
 ```
 
 ## Example Usage
