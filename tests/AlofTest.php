@@ -33,4 +33,19 @@ final class AlofTest extends TestCase
         $handle = fopen(__FILE__, 'r');
         $this->assertFalse(Alof::is_alo($handle));
     }
+
+    public function testAloKeys()
+    {
+        $testArray = [
+            1 => 1,
+            '4' => '4',
+            'c' => 'c',
+        ];
+        $testAlo = new ArrayObject($testArray);
+        $this->assertEquals([1, '4', 'c'], Alof::alo_keys($testAlo));
+        $this->assertEquals(['4'], Alof::alo_keys($testAlo, '4'));
+        $this->assertEquals(['4'], Alof::alo_keys($testAlo, 4));
+        $this->assertEquals(['4'], Alof::alo_keys($testAlo, '4', true));
+        $this->assertEquals([], Alof::alo_keys($testAlo, 4, true));
+    }
 }
