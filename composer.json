@@ -3,8 +3,8 @@
     "type": "library",
     "description": "PHP array-like object functions library.",
     "keywords": [
-        "util",
-        "object",
+        "library",
+        "utility",
         "arrayaccess",
         "traversable",
         "arrayobject",
