@@ -5,6 +5,7 @@ PHP array-like object functions library ("alof-lib"). Type-hinted functions for 
 
 An array-like object ("ALO") is defined to be `implements ArrayAccess` and `implements Traversable`. Examples of array-like objects include:
 - [https://www.php.net/manual/en/class.arrayobject.php](ArrayObject) (since PHP 5)
+- [https://www.php.net/manual/en/class.arrayiterator.php](ArrayIterator) (since PHP 5)
 - [https://www.php.net/manual/en/class.splobjectstorage.php](SplObjectStorage) (since PHP 5.1)
 - [https://www.php.net/manual/en/class.splfixedarray.php](SplFixedArray) (since PHP 5.3)
 - [https://www.php.net/manual/en/class.weakmap.php](WeakMap) (since PHP 8)
