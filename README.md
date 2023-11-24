@@ -33,3 +33,19 @@ This library uses PHPUnit for testing. To test this library, run:
 ```
 ./vendor/bin/phpunit tests
 ```
+
+## Example Usage
+Refer to the test cases under `/tests` for more examples, but for a minimal example:
+```php
+use Vectorial1024\AlofLib\Alof;
+
+$map = new WeakMap();
+$objKey = new stdClass();
+$objKey->name = "foo";
+$map[$objKey] = "1";
+$map[$objKey] = 2;
+$map[$objKey] = "Hello World!";
+
+// conveniently get the keys of the WeakMap
+$keys = Alof::alo_keys($map);
+```
