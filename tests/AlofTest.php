@@ -10,7 +10,10 @@ final class AlofTest extends TestCase
         // is alo
         // implements array access and traversable
         $this->assertTrue(Alof::is_alo(new WeakMap()));
-        // we will not test SPL Object Storage because supposedly, it is possible to be unavailable
+        $this->assertTrue(Alof::is_alo(new ArrayObject()));
+        $this->assertTrue(Alof::is_alo(new ArrayIterator([])));
+        $this->assertTrue(Alof::is_alo(new SplFixedArray(10)));
+        $this->assertTrue(Alof::is_alo(new SplObjectStorage()));
 
         // is not alo
         // basically, other primitive types and objects
