@@ -81,6 +81,11 @@ final class AlofTest extends TestCase
         $this->assertEquals([], Alof::alo_keys($testAlo, '0', true));
 
         $this->assertEquals($this->sosKeys, Alof::alo_keys($this->splObjectStore));
+        $this->assertEquals([$this->sosKeys[0]], Alof::alo_keys($this->splObjectStore, $this->sosKeys[0]));
+        $fakeDummy = clone $this->sosKeys[0];
+        $this->assertEquals([$this->sosKeys[0]], Alof::alo_keys($this->splObjectStore, $fakeDummy));
+        $this->assertEquals([$this->sosKeys[0]], Alof::alo_keys($this->splObjectStore, $this->sosKeys[0], true));
+        $this->assertEquals([], Alof::alo_keys($this->splObjectStore, $fakeDummy, true));
     }
 
     public function testAloValues()

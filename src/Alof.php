@@ -86,15 +86,11 @@ class Alof
         $result = [];
         if (!isset($filter_value)) {
             // keys only
-            foreach ($storage as $ignored) {
-                $result[] = $storage->current();
-            }
-            return $result;
+            return iterator_to_array($storage, preserve_keys: false);
         }
         if (!$strict) {
             // non-strict filtering
-            foreach ($storage as $ignored) {
-                $theKey = $storage->current();
+            foreach ($storage as $theKey) {
                 if ($theKey != $filter_value) {
                     continue;
                 }
@@ -103,14 +99,8 @@ class Alof
             return $result;
         }
         // strict filtering
-        foreach ($storage as $ignored) {
-            $theKey = $storage->current();
-            if ($theKey !== $filter_value) {
-                continue;
-            }
-            $result[] = $theKey;
-        }
-        return $result;
+        // because this is SplObjectStorage, either the key exists, or it does not
+        return isset($storage[$filter_value]) ? [$filter_value] : [];
     }
 
     /**
