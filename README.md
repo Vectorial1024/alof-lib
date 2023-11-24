@@ -22,7 +22,7 @@ An array-like object ("ALO") is defined to be `implements ArrayAccess` and `impl
 
 A PHP `array` is NOT an ALO. It is still an array.
 
-Requires PHP 8.1.
+Latest version requires PHP 8.1+.
 
 ## Notes and Disclaimers
 - ALO functions aim to be faithful user-land reproductions of their array function counterparts, but there might be slight differences between both sides
