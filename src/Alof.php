@@ -78,7 +78,7 @@ class Alof
      * @param mixed $filter_value
      * @param bool $strict
      * @return array
-     * @see alo_keys()
+     * @see self::alo_keys()
      */
     private static function alo_keys_splObjectStore(SplObjectStorage $storage, mixed $filter_value = null, bool $strict = false): array
     {
@@ -133,7 +133,7 @@ class Alof
      * alo_values, but for SplObjectStorage to account for its legacy bug.
      * @param SplObjectStorage $storage
      * @return array
-     * @see alo_values()
+     * @see self::alo_values()
      */
     private static function alo_values_splObjectStore(SplObjectStorage $storage): array
     {
@@ -169,7 +169,7 @@ class Alof
      * @param callable $callback
      * @param array $args
      * @return true
-     * @see alo_walk()
+     * @see self::alo_walk()
      */
     private static function alo_walk_splObjectStore(SplObjectStorage $objectStorage, callable $callback, array $args = []): bool
     {
