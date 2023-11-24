@@ -80,4 +80,20 @@ class Alof
     {
         return iterator_to_array($alo, preserve_keys: false);
     }
+
+    /**
+     * Applies a callback to each element of the given array-like object.
+     * @param Traversable<mixed, mixed>&ArrayAccess<mixed, mixed> $alo the array-like object
+     * @param callable $callback the callback to apply
+     * @param array $args (optional) the arguments to be passed to the callback
+     * @return true
+     * @see array_walk() for equivalent behavior in arrays
+     */
+    public static function alo_walk(Traversable&ArrayAccess $alo, callable $callback, array $args = []): bool
+    {
+        foreach ($alo as $key => $value) {
+            $callback($value, $key, ...$args);
+        }
+        return true;
+    }
 }
