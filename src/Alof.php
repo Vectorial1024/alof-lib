@@ -36,7 +36,7 @@ class Alof
      * @param Traversable<TKey, mixed>&ArrayAccess<TKey, mixed> $alo the array-like object
      * @param mixed $filter_value (optional) the value to filter by
      * @param bool $strict (optional) whether to use strict comparison (===) while filtering
-     * @return array<TKey>
+     * @return list<TKey>
      * @see array_keys() for equivalent behavior in arrays
      */
     public static function alo_keys(Traversable&ArrayAccess $alo, mixed $filter_value = null, bool $strict = false): array
