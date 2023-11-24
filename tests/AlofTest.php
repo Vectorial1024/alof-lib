@@ -152,19 +152,20 @@ final class AlofTest extends TestCase
         Alof::alo_walk($testAlo2, $appendFunc);
         $this->assertEquals($testArray2, $output);
 
-        // perform key-aware extraction over all elements, with multiplication
+        // perform key-aware extraction over all elements, via multiplication, with multiple arguments
         $testArray3 = [
             3 => 1,
             4 => 2,
         ];
         $factor = 3;
+        $factor2 = 5;
         $testAlo3 = new ArrayObject($testArray3);
         $output = [];
-        Alof::alo_walk($testAlo3, function (int $item, int $key, int $factor) use (&$output) {
-            $output[$key] = $item * $key * $factor;
-        }, [$factor]);
+        Alof::alo_walk($testAlo3, function (int $item, int $key, int $factor, int $factor2) use (&$output) {
+            $output[$key] = $item * $key * $factor * $factor2;
+        }, [$factor, $factor2]);
         foreach ($output as $key => $value) {
-            $this->assertEquals($value, $key * $testArray3[$key] * $factor);
+            $this->assertEquals($value, $key * $testArray3[$key] * $factor * $factor2);
         }
 
         // test against object keys by walk-sum
