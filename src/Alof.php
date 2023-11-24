@@ -44,7 +44,7 @@ class Alof
         }
         // use separate loops for best performance
         $result = [];
-        if (!$filter_value) {
+        if (!isset($filter_value)) {
             // keys only
             foreach ($alo as $key => $value) {
                 $result[] = $key;
@@ -84,7 +84,7 @@ class Alof
     {
         // use separate loops for best performance
         $result = [];
-        if (!$filter_value) {
+        if (!isset($filter_value)) {
             // keys only
             foreach ($storage as $ignored) {
                 $result[] = $storage->current();

@@ -37,16 +37,16 @@ final class AlofTest extends TestCase
     public function testAloKeys()
     {
         $testArray = [
-            1 => 3,
+            0 => 3,
             '4' => 'c',
             'c' => 'g',
         ];
         $testAlo = new ArrayObject($testArray);
-        $this->assertEquals([1, '4', 'c'], Alof::alo_keys($testAlo));
-        $this->assertEquals(['4'], Alof::alo_keys($testAlo, '4'));
-        $this->assertEquals(['4'], Alof::alo_keys($testAlo, 4));
-        $this->assertEquals(['4'], Alof::alo_keys($testAlo, '4', true));
-        $this->assertEquals([], Alof::alo_keys($testAlo, 4, true));
+        $this->assertEquals(array_keys($testArray), Alof::alo_keys($testAlo));
+        $this->assertEquals([0], Alof::alo_keys($testAlo, 0));
+        $this->assertEquals([0], Alof::alo_keys($testAlo, '0'));
+        $this->assertEquals([0], Alof::alo_keys($testAlo, 0, true));
+        $this->assertEquals([], Alof::alo_keys($testAlo, '0', true));
     }
 
     public function testAloKeysSplObjectStorage()
@@ -77,7 +77,7 @@ final class AlofTest extends TestCase
     public function testAloValues()
     {
         $testArray = [
-            1 => 3,
+            0 => 3,
             '4' => 'c',
             'c' => 'g',
         ];
