@@ -24,6 +24,8 @@ A PHP `array` is NOT an ALO. It is still an array.
 
 Latest version requires PHP 8.1+.
 
+See the change log in the `CHANGELOG.md` file.
+
 ## Notes and Disclaimers
 - ALO functions aim to be faithful user-land reproductions of their array function counterparts, but there might be slight differences between both sides
 - Some ALO functions may not make sense depending on your exact ALO implementation; use judgement before you use the ALO functions
