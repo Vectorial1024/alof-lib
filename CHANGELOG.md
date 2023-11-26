@@ -1,6 +1,9 @@
-# Change Log
+# Change Log of `AlofLib`
 
-## 0.1.0 (Unreleased)
+## Dev (WIP)
+- ...
+
+## 0.1.0 (Release Pending)
 Implemented basic functions on array-like objects:
 - Implemented `is_alo()`
 - Implemented `alo_keys()`
@@ -9,4 +12,4 @@ Implemented basic functions on array-like objects:
 
 ## 0.0.0 (2023-11-23)
 - Initial release
-- No features at this version
+- No features in this version
