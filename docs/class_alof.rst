@@ -8,12 +8,7 @@ Alof
 
 Alof is the class that contains the functions of AlofLib.
 
-.. php:class:: Alof
-   Alof contains all the ALO functions.
+Its full qualification is Vectorial1024\AlofLib\Alof.
 
-   .. php:method:: is_alo($value)
-      Returns whether the given value is an ALO.
-      :param mixed $value: The value to check.
-      :returns: Whether the value is an ALO.
-
+FOr now, please refer to the PHP source code for the documentation. We are finding a way to automatically generate compatible documentations from PHP sources.
 
