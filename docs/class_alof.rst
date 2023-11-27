@@ -14,9 +14,13 @@ For now, please refer to the PHP source code for the documentation. We are findi
 
 .. php:class:: AlofLib
    :nocontentsentry:
+
    The class that contains the array-like object functions.
+
    .. php:method:: is_alo($value)
       :nocontentsentry:
+
       Returns whether the given value is an ALO: - implements Traversable - implements ArrayAccess
+
       :param mixed $value: The value for testing.
       :returns: True if the object is an alo, and therefore processable by this library.
