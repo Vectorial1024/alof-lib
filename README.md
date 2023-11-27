@@ -4,6 +4,7 @@
 [![downloads](http://poser.pugx.org/vectorial1024/alof-lib/downloads)](https://packagist.org/packages/vectorial1024/alof-lib)
 [![license](http://poser.pugx.org/vectorial1024/alof-lib/license)](https://packagist.org/packages/vectorial1024/alof-lib)
 [![php](http://poser.pugx.org/vectorial1024/alof-lib/require/php)](https://packagist.org/packages/vectorial1024/alof-lib)
+[![readthedocs](https://readthedocs.org/projects/alof-lib/badge/?version=latest)](https://alof-lib.readthedocs.io/en/latest/?badge=latest)
 
 (This is a WIP project!)
 
