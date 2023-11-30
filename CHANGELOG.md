@@ -3,7 +3,7 @@
 ## Dev (WIP)
 - ...
 
-## 0.1.0 (Release Pending)
+## 0.1.0 (2023-12-01)
 Implemented basic functions on array-like objects:
 - Implemented `is_alo()`
 - Implemented `alo_keys()`
