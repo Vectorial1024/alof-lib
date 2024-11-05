@@ -34,6 +34,13 @@ See also `vectorial1024/transmutation` for a collection-like library for ALOs.
 - ALO functions aim to be faithful user-land reproductions of their array function counterparts, but there might be slight differences between both sides
 - Some ALO functions may not make sense depending on your exact ALO implementation; use judgement before you use the ALO functions
 
+## Installation
+via Composer:
+
+```sh
+composer require vectorial1024/alof_lib
+```
+
 ## Testing
 This library uses PHPUnit for testing, which can be triggered from Composer. To test this library, run:
 
