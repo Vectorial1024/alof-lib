@@ -1,16 +1,17 @@
 # alof-lib
-[![stable](http://poser.pugx.org/vectorial1024/alof-lib/v)](https://packagist.org/packages/vectorial1024/alof-lib)
-![phpunit](https://github.com/vectorial1024/alof-lib/actions/workflows/php.yml/badge.svg)
-[![downloads](http://poser.pugx.org/vectorial1024/alof-lib/downloads)](https://packagist.org/packages/vectorial1024/alof-lib)
-[![license](http://poser.pugx.org/vectorial1024/alof-lib/license)](https://packagist.org/packages/vectorial1024/alof-lib)
-[![php](http://poser.pugx.org/vectorial1024/alof-lib/require/php)](https://packagist.org/packages/vectorial1024/alof-lib)
+[![Packagist License][packagist-license-image]][packagist-url]
+[![Packagist Version][packagist-version-image]][packagist-url]
+[![Packagist Downloads][packagist-downloads-image]][packagist-stats-url]
+[![PHP Dependency Version][php-version-image]][packagist-url]
+[![GitHub Actions Workflow Status][php-build-status-image]][github-actions-url]
+[![GitHub Repo Stars][github-stars-image]][github-repo-url]
 [![readthedocs](https://readthedocs.org/projects/alof-lib/badge/?version=latest)](https://alof-lib.readthedocs.io/en/latest/?badge=latest)
 
 (This is a WIP project!)
 
 PHP array-like object functions library ("alof-lib"). Type-hinted functions for array-like objects, just like [those for native arrays](https://www.php.net/manual/en/ref.array.php). Think of this library as a polyfill of those useful functions for array-like objects, so that you may write clean code with array-like objects.
 
-An array-like object ("ALO") is defined to be `implements ArrayAccess` and `implements Traversable`. Examples of array-like objects include:
+An array-like object ("ALO") is defined to be `implements ArrayAccess` and `implements Traversable`. Examples include:
 - [ArrayObject](https://www.php.net/manual/en/class.arrayobject.php) (since PHP 5)
 - [ArrayIterator](https://www.php.net/manual/en/class.arrayiterator.php) (since PHP 5)
 - [SplObjectStorage](https://www.php.net/manual/en/class.splobjectstorage.php) (since PHP 5.1)
@@ -65,3 +66,15 @@ assert($keys === [$objKey]); // passes
 
 ## Relationship with `transmutation`
 This library does the dirty work and ensures the correctness of ALO functions, while `transmutation` provides an easy-to-use API for ALO processing.
+
+[packagist-url]: https://packagist.org/packages/vectorial1024/alof-lib
+[packagist-stats-url]: https://packagist.org/packages/vectorial1024/alof-lib/stats
+[github-repo-url]: https://github.com/Vectorial1024/alof-lib
+[github-actions-url]: https://github.com/Vectorial1024/alof-lib/actions/workflows/php.yml
+
+[packagist-license-image]: https://img.shields.io/packagist/l/vectorial1024/alof-lib?style=plastic
+[packagist-version-image]: https://img.shields.io/packagist/v/vectorial1024/alof-lib?style=plastic
+[packagist-downloads-image]: https://img.shields.io/packagist/dm/vectorial1024/alof-lib?style=plastic
+[php-version-image]: https://img.shields.io/packagist/dependency-v/vectorial1024/alof-lib/php?style=plastic&label=PHP
+[php-build-status-image]: https://img.shields.io/github/actions/workflow/status/Vectorial1024/alof-lib/php.yml?style=plastic
+[github-stars-image]: https://img.shields.io/github/stars/vectorial1024/alof-lib
