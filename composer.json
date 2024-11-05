@@ -30,6 +30,9 @@
     "require-dev": {
         "phpunit/phpunit": "^10.4"
     },
+    "suggest": {
+        "vectorial1024/transmutation": "A \"collections\"-like library for array-like objects."
+    },
     "scripts": {
         "test": "vendor/bin/phpunit tests"
     }

@@ -27,6 +27,8 @@ Latest version requires PHP 8.1+.
 
 See the change log in the `CHANGELOG.md` file.
 
+See also `vectorial1024/transmutation` for a collection-like library for ALOs.
+
 ## Notes and Disclaimers
 - ALO functions aim to be faithful user-land reproductions of their array function counterparts, but there might be slight differences between both sides
 - Some ALO functions may not make sense depending on your exact ALO implementation; use judgement before you use the ALO functions
@@ -60,3 +62,6 @@ $splObjectStore[$objKey] = "Hello World!";
 $keys = Alof::alo_keys($splObjectStore);
 assert($keys === [$objKey]); // passes
 ```
+
+## Relationship with `transmutation`
+This library does the dirty work and ensures the correctness of ALO functions, while `transmutation` provides an easy-to-use API for ALO processing.
