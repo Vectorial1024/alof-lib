@@ -7,6 +7,7 @@
 Maintenance update:
 - Cleaned up the README and the test cases
 - Removed `composer.lock` from distribution
+- Now suggests `vectorial1024/transmutation`
 
 ## 0.1.0 (2023-12-01)
 Implemented basic functions on array-like objects:
