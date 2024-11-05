@@ -19,6 +19,11 @@
             "Vectorial1024\\AlofLib\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Vectorial1024\\AlofLib\\Test\\": "tests/"
+        }
+    },
     "authors": [
         {
             "name": "Vectorial1024"

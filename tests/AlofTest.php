@@ -2,6 +2,17 @@
 
 declare(strict_types=1);
 
+namespace Vectorial1024\AlofLib\Test;
+
+use ArrayIterator;
+use ArrayObject;
+use stdClass;
+use SplDoublyLinkedList;
+use SplFixedArray;
+use SplObjectStorage;
+use SplQueue;
+use SplStack;
+use WeakMap;
 use PHPUnit\Framework\TestCase;
 use Vectorial1024\AlofLib\Alof;
 
