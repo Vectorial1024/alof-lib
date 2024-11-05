@@ -28,7 +28,7 @@ Latest version requires PHP 8.1+.
 
 See the change log in the `CHANGELOG.md` file.
 
-See also `vectorial1024/transmutation` for a collection-like library for ALOs.
+Want to easily process ALOs? See `vectorial1024/transmutation` [here](https://github.com/Vectorial1024/transmutation).
 
 ## Notes and Disclaimers
 - ALO functions aim to be faithful user-land reproductions of their array function counterparts, but there might be slight differences between both sides
