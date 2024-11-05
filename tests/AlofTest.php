@@ -6,6 +6,7 @@ namespace Vectorial1024\AlofLib\Test;
 
 use ArrayIterator;
 use ArrayObject;
+use PHPUnit\Framework\Attributes\DataProvider;
 use stdClass;
 use SplDoublyLinkedList;
 use SplFixedArray;
@@ -58,36 +59,10 @@ final class AlofTest extends TestCase
         $this->aloWithObjAsKeyType = [$splObjectStore, $weakMap];
     }
 
-    public function testIsAlo()
+    #[DataProvider('aloCaseProvider')]
+    public function testIsAlo(mixed $value, bool $truth)
     {
-        // is alo
-        // implements array access and traversable
-        $this->assertTrue(Alof::is_alo(new WeakMap()));
-        $this->assertTrue(Alof::is_alo(new ArrayObject()));
-        $this->assertTrue(Alof::is_alo(new ArrayIterator([])));
-        $this->assertTrue(Alof::is_alo(new SplDoublyLinkedList()));
-        $this->assertTrue(Alof::is_alo(new SplFixedArray(10)));
-        $this->assertTrue(Alof::is_alo(new SplStack()));
-        $this->assertTrue(Alof::is_alo(new SplQueue()));
-        $this->assertTrue(Alof::is_alo(new SplObjectStorage()));
-        foreach ($this->aloWithObjAsKeyType as $alo) {
-            $this->assertTrue(Alof::is_alo($alo));
-        }
-
-        // is not alo
-        // basically, other primitive types and objects
-        $this->assertFalse(Alof::is_alo(null));
-        $this->assertFalse(Alof::is_alo(false));
-        $this->assertFalse(Alof::is_alo(true));
-        $this->assertFalse(Alof::is_alo(10));
-        $this->assertFalse(Alof::is_alo(12.5));
-        $this->assertFalse(Alof::is_alo('hello world'));
-        $this->assertFalse(Alof::is_alo([]));
-        $this->assertFalse(Alof::is_alo(new stdClass()));
-        $handle = fopen(__FILE__, 'r');
-        $this->assertFalse(Alof::is_alo($handle));
-        $this->assertFalse(Alof::is_alo($this->sosKeys));
-        $this->assertFalse(Alof::is_alo($this->sosValues));
+        $this->assertEquals($truth, Alof::is_alo($value));
     }
 
     public function testAloKeys()
@@ -187,5 +162,36 @@ final class AlofTest extends TestCase
             });
             $this->assertEquals(array_sum($this->sosValues), $sum);
         }
+    }
+
+    public static function aloCaseProvider()
+    {
+        // [test_value, is_alo]
+        $cases = [];
+        // is alo
+        // implements array access and traversable
+        $cases[] = [new WeakMap(), true];
+        $cases[] = [new ArrayObject(), true];
+        $cases[] = [new ArrayIterator([]), true];
+        $cases[] = [new SplDoublyLinkedList(), true];
+        $cases[] = [new SplFixedArray(10), true];
+        $cases[] = [new SplStack(), true];
+        $cases[] = [new SplQueue(), true];
+        $cases[] = [new SplObjectStorage(), true];
+
+        // is not alo
+        // basically, other primitive types and objects
+        $cases[] = [null, false];
+        $cases[] = [false, false];
+        $cases[] = [true, false];
+        $cases[] = [10, false];
+        $cases[] = [12.5, false];
+        $cases[] = ['hello world', false];
+        $cases[] = [[], false];
+        $cases[] = [new stdClass(), false];
+        $handle = fopen(__FILE__, 'r');
+        $cases[] = [$handle, false];
+        
+        return $cases;
     }
 }
