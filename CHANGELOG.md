@@ -3,6 +3,11 @@
 ## Dev (WIP)
 - ...
 
+## 0.1.1 (2024-11-05)
+Maintenance update:
+- Cleaned up the README and the test cases
+- Removed `composer.lock` from distribution
+
 ## 0.1.0 (2023-12-01)
 Implemented basic functions on array-like objects:
 - Implemented `is_alo()`
