@@ -9,6 +9,9 @@
 
 > [!Warning]
 > Last Updated: 2026-04-21
+> 
+> **THIS PROJECT IS ABANDONED AND ARCHIVED!**
+> 
 > This project was created as an experimentation for a generic way to manipulate array-like objects in PHP.
 > However, seeing the lack of community interest in this topic, this project has been abandoned and archived.
 > Use at your own risk.
