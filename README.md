@@ -7,6 +7,12 @@
 [![GitHub Repo Stars][github-stars-image]][github-repo-url]
 [![readthedocs](https://readthedocs.org/projects/alof-lib/badge/?version=latest)](https://alof-lib.readthedocs.io/en/latest/?badge=latest)
 
+> [!Warning]
+> Last Updated: 2026-04-21
+> This project was created as an experimentation for a generic way to manipulate array-like objects in PHP.
+> However, seeing the lack of community interest in this topic, this project has been abandoned and archived.
+> Use at your own risk.
+
 (This is a WIP project!)
 
 PHP array-like object functions library ("alof-lib"). Type-hinted functions for array-like objects, just like [those for native arrays](https://www.php.net/manual/en/ref.array.php). Think of this library as a polyfill of those useful functions for array-like objects, so that you may write clean code with array-like objects.
